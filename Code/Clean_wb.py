@@ -54,10 +54,18 @@ inflation['Year'] = inflation['Year'].str.replace('YR', '').astype(int)
 panel = trade.merge(inflation, on=['economy', 'Year'], how='left').merge(unemployment, on=['economy', 'Year'], how='left')
 
 panel['economy'] = panel['economy'].map(country_list)
+panel['POST_WTO'] = (panel['Year'] >= 2001).astype(int)
+panel['Interaction'] = panel['POST_WTO'] * panel['Unemployment_Rate']
+
 panel = panel.rename(columns={'economy': 'Countries', 'time': 'Year', 'NE.TRD.GNFS.ZS': 'Trade_GDP_Percentage', 'FP.CPI.TOTL.ZG': 'Inflation_Rate', 'SL.UEM.TOTL.ZS': 'Unemployment_Rate'})
+
 panel.to_csv('panel_data.csv', index=False)
+
 panel = panel.dropna(subset=['Unemployment_Rate'])
 panel = panel.sort_values(by=['Countries', 'Year'])
+
 panel = panel.reset_index(drop=True)
+
 print(panel.head())
+
 panel.to_csv("C:/phillips_project/data/processed_panel_data.csv", index=False)
