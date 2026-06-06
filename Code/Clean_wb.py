@@ -68,4 +68,4 @@ panel = panel.reset_index(drop=True)
 
 print(panel.head())
 
-panel.to_csv("C:/phillips_project/data/processed_panel_data.csv", index=False)
+panel.to_csv("C:/phillips_project/data/processed/processed_panel_data.csv", index=False)
