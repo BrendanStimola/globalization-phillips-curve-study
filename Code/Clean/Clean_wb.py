@@ -25,13 +25,13 @@ trade = wb.data.DataFrame('NE.TRD.GNFS.ZS', economy=codes, time=range(1990, 2025
 inflation = wb.data.DataFrame('FP.CPI.TOTL.ZG', economy=codes, time=range(1990, 2025))
 unemployment = wb.data.DataFrame('SL.UEM.TOTL.ZS', economy=codes, time=range(1990, 2025))
 LFPR = wb.data.DataFrame('SL.TLF.CACT.ZS', economy=codes, time=range(1990, 2025))
-tariff = wb.data.DataFrame('TM.TAX.MRCH.WM.AR.ZS', economy=codes, time=ramge(1990, 2025))
+tariff = wb.data.DataFrame('TM.TAX.MRCH.WM.AR.ZS', economy=codes, time=range(1990, 2025))
 
 trade = trade.reset_index()
 inflation = inflation.reset_index()
 unemployment = unemployment.reset_index()
 LFPR = LFPR.reset_index()
-tariff = tariffs.reset_index()
+tariff = tariff.reset_index()
 
 trade = trade.melt(
     id_vars='economy',
@@ -56,7 +56,7 @@ LFPR = LFPR.melt(
 tariff = tariff.melt(
     id_vars='economy',
     var_name='Year',
-    value_name='Tarrif_Rate'
+    value_name='Tarriff_Rate'
 )
 
 trade['Year'] = trade['Year'].str.replace('YR', '').astype(int)
@@ -78,12 +78,6 @@ panel['Trade_GDP_Lag'] = (
     panel.groupby('economy')['Trade_GDP']
          .shift(1)
 )
-
-panel["Unemployment_Rate_Lag"] = panel.groupby('economy')['Unemployment_Rate'].shift(1)
-panel["Trade_GDP_Lag"] = panel.groupby('economy')['Trade_GDP'].shift(1)
-
-panel["Unemployment_Rate_Lag"] = panel.groupby('economy')['Unemployment_Rate'].shift(1)
-panel["Trade_GDP_Lag"] = panel.groupby('economy')['Trade_GDP'].shift(1)
 
 panel['economy'] = panel['economy'].map(country_list)
 panel['POST_WTO'] = (panel['Year'] >= 2001).astype(int)
