@@ -2,7 +2,7 @@ import pandas as pd
 import statsmodels.api as sm
 import numpy as np
 
-df = pd.read_csv("C:/phillips_project/data/processed/clean_data.csv")
+panel = pd.read_csv("C:/phillips_project/data/processed/processed_panel_data.csv")
 
 def inputs():
   print("OLS regression model (1954-2026)")
@@ -30,12 +30,12 @@ def inputs():
 
 input_1, input_2 = inputs()
 
-df = df[df["year"].between(input_1, input_2)]
+panel = panel[panel["Year"].between(input_1, input_2)]
 
-X = df[["UNRATE_c","TRADE_GDP_c", "UNRATE_x_TRADE", "INFLATION_LAGGED"]]
+X = panel[["Unemployment_Rate","Trade_GDP", "Interaction", "Inflation_Lagged"]]
 X = sm.add_constant(X)
 
-y = df["INFLATION"]
+y = panel["Inflation_Rate"]
 
 model = sm.OLS(y, X).fit(
     cov_type="HAC",

@@ -56,7 +56,7 @@ LFPR = LFPR.melt(
 tariff = tariff.melt(
     id_vars='economy',
     var_name='Year',
-    value_name='Tarriff_Rate'
+    value_name='Tariff_Rate'
 )
 
 trade['Year'] = trade['Year'].str.replace('YR', '').astype(int)
@@ -79,13 +79,18 @@ panel['Trade_GDP_Lag'] = (
          .shift(1)
 )
 
+panel['Inflation_Lagged'] = (
+    panel.groupby('economy')['Inflation_Rate']
+    .shift(1)
+)
+
 panel['economy'] = panel['economy'].map(country_list)
 panel['POST_WTO'] = (panel['Year'] >= 2001).astype(int)
 panel['Interaction'] = panel['POST_WTO'] * panel['Unemployment_Rate'] * panel['Trade_GDP']
 
 panel = panel.rename(columns={'economy': 'Countries', 'time': 'Year', 'NE.TRD.GNFS.ZS': 'Trade_GDP_Percentage', 
 'FP.CPI.TOTL.ZG': 'Inflation_Rate', 'SL.UEM.TOTL.ZS': 'Unemployment_Rate', 'Unemployment_Rate_Lag': 'Unemployment_Rate_Lag', 'SL.TLF.CACT.ZS': 'LFPR',
-'Trade_GDP_Lag': 'Trade_GDP_Lag', 'TM.TAX.MRCH.WM.AR.ZS': 'Tarrif_Rate'})
+'Trade_GDP_Lag': 'Trade_GDP_Lag', 'TM.TAX.MRCH.WM.AR.ZS': 'Tariff_Rate', 'Inflation_Lagged': 'Inflation_Lagged'})
 
 panel.to_csv('panel_data.csv', index=False)
 
@@ -93,6 +98,7 @@ panel = panel.dropna(subset=['Unemployment_Rate'])
 panel = panel.dropna(subset=['Unemployment_Rate_Lag'])
 panel = panel.dropna(subset=['Trade_GDP_Lag'])
 panel = panel.dropna(subset=['Tariff_Rate'])
+panel = panel.dropna(subset=['Inflation_Lagged'])
 
 panel = panel.reset_index(drop=True)
 

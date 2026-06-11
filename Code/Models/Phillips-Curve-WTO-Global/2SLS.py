@@ -34,7 +34,8 @@ def run_iv(data):
                 "Unemployment_Rate_Lag",
                 "Trade_GDP_Lag",
                 "LFPR",
-                "Lagged_Inflation_Rate"
+                "Lagged_Inflation_Rate",
+                "Tariff_Rate"
             ]
         ]
     )
@@ -102,7 +103,8 @@ def wild_cluster_bootstrap(data, res, B=999):
                         "Unemployment_Rate_Lag",
                         "Trade_GDP_Lag",
                         "LFPR",
-                        "Lagged_Inflation_Rate"
+                        "Lagged_Inflation_Rate",
+                        "Tariff_Rate"
                     ]
                 ]
             )
