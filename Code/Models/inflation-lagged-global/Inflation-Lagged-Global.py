@@ -2,6 +2,27 @@ import pandas as pd
 import statsmodels.api as sm
 import numpy as np
 
+"""
+Global Phillips Curve Model with Lagged Inflation
+
+Purpose:
+    Estimates whether globalization changes the relationship
+    between unemployment and inflation.
+
+Model Includes:
+    - Unemployment rate
+    - Trade openness
+    - Unemployment × Trade interaction
+    - Lagged inflation
+
+Method:
+    OLS regression with HAC standard errors.
+
+Goal:
+    Test whether trade openness alters the slope
+    of the Phillips Curve.
+"""
+
 panel = pd.read_csv("C:/phillips_project/data/processed/processed_panel_data.csv")
 
 def inputs():

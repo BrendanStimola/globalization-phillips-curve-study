@@ -1,6 +1,32 @@
 import pandas as pd
 import wbgapi as wb
 
+"""
+Data Cleaning Pipeline
+
+Purpose:
+    Cleans and prepares raw macroeconomic datasets for analysis.
+
+Datasets:
+    - CPI (Consumer Price Index)
+    - Unemployment Rate
+    - Imports
+    - Exports
+    - GDP
+    - Labor Force Participation Rate
+    - Tariff Rate
+
+Steps:
+    1. Load raw datasets
+    2. Rename and standardize variables
+    3. Merge datasets by date
+    4. Calculate inflation and trade openness
+    5. Export processed dataset
+
+Output:
+    Cleaned dataset used in regression models.
+"""
+
 country_list = {
     "USA": "United States",
     "CAN": "Canada",

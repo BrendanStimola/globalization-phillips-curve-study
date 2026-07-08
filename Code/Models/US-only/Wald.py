@@ -2,6 +2,28 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
+"""
+US Structural Break Test
+
+Purpose:
+    Tests whether the Phillips Curve relationship changed
+    after 2001.
+
+Structural Break:
+    China's accession to the World Trade Organization (WTO)
+
+Variables:
+    - Post-2001 dummy variable
+    - Unemployment × Post-2001 interaction
+
+Method:
+    Wald hypothesis tests.
+
+Purpose:
+    Determine whether coefficients changed significantly
+    after the structural break date.
+"""
+
 # =========================================================
 # 1. DATA PREPARATION
 # =========================================================

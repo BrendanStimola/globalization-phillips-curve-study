@@ -4,6 +4,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 
+"""
+Baseline Phillips Curve Model (United States)
+
+Research Question:
+    Does unemployment remain associated with inflation
+    after accounting for inflation persistence and globalization?
+
+Dependent Variable:
+    Inflation
+
+Independent Variables:
+    - Unemployment rate
+    - Trade openness
+    - Unemployment × Trade interaction
+    - Lagged inflation
+
+Method:
+    Ordinary Least Squares (OLS)
+
+Inference:
+    HAC (Newey-West) standard errors with 4 lags.
+
+Output:
+    Regression coefficients, statistical significance,
+    and diagnostic statistics.
+"""
+
 # -----------------------------
 # LOAD DATA
 # -----------------------------

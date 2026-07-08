@@ -2,6 +2,21 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
+"""
+Global Structural Break Analysis
+
+Purpose:
+    Tests for structural changes in the Phillips Curve
+    relationship around 2001.
+
+Method:
+    Regression with structural break indicators
+    and Wald tests.
+
+Output:
+    Tests of coefficient stability before and after 2001.
+"""
+
 # =========================================================
 # 1. DATA PREPARATION
 # =========================================================

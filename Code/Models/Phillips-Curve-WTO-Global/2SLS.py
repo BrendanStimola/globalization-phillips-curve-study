@@ -2,6 +2,23 @@ import numpy as np
 import pandas as pd
 from linearmodels.iv import IV2SLS
 
+"""
+Instrumental Variables Estimation (2SLS)
+
+Purpose:
+    Estimates the Phillips Curve relationship using
+    instrumental variable methods.
+
+Method:
+    Two-Stage Least Squares (2SLS)
+
+Package:
+    linearmodels.iv
+
+Purpose:
+    Address potential endogeneity concerns in the model.
+"""
+
 # -----------------------------
 # LOAD + PREP DATA
 # -----------------------------

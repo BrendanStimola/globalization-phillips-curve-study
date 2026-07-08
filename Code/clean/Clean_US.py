@@ -1,6 +1,30 @@
 import pandas as pd
 import numpy as np
 
+"""
+Data Cleaning Pipeline
+
+Purpose:
+    Cleans and prepares raw macroeconomic datasets for analysis.
+
+Datasets:
+    - CPI (Consumer Price Index)
+    - Unemployment Rate
+    - Imports
+    - Exports
+    - GDP
+
+Steps:
+    1. Load raw datasets
+    2. Rename and standardize variables
+    3. Merge datasets by date
+    4. Calculate inflation and trade openness
+    5. Export processed dataset
+
+Output:
+    Cleaned dataset used in regression models.
+"""
+
 start = 1954
 end = 2026
 

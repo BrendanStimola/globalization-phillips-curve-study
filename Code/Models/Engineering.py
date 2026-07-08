@@ -1,6 +1,17 @@
 import pandas as pd
 import pyfixest as fe
 
+"""
+Feature Engineering
+
+Purpose:
+    Creates inflation gap for each country.
+
+Created Variables:
+    - inflation_gap: Difference between actual inflation rate and mean inflation rate for each country.
+    - inflation_mean: Mean inflation rate for each country.
+"""
+
 # 1. Load data
 panel = pd.read_csv("C:/phillips_project/data/processed/processed_panel_data.csv")
 
