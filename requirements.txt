@@ -1,0 +1,8 @@
+wbgapi
+pandas
+numpy
+statsmodels
+matplotlib
+scipy
+linearmodels
+pyfixest
