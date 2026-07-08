@@ -34,6 +34,7 @@ df = df[df["year"].between(start, end)].copy()
 
 # INFLATION
 df["INFLATION"] = df["CPI"].pct_change(12) * 100
+df["INFLATION"] = df["INFLATION"].diff()
 df["INFLATION_LAGGED"] = df["INFLATION"].shift(1)
 
 # TRADE

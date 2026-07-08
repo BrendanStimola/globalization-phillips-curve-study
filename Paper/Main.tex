@@ -1,9 +1,20 @@
+ %!BIB program = biber
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{amsmath}
+\usepackage{amsmath} % Allows LaTeX to use more math symbols
 \usepackage{subcaption}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage[dvipsnames]{xcolor} 
+\usepackage{url} % Allows URLs to be put in th epaper
+\usepackage{xurl} % Allows URLs to break anywhere, including mid-word if needed
+\usepackage{hyperref} % Enables clickable \url links
+\usepackage[T1]{fontenc}    % Forces LaTeX to use modern 8-bit font encoding
+\usepackage[utf8]{inputenc}  % Ensures proper translation of keyboard characters
+\usepackage{url}             % Properly formats URLs so they don't break awkwardly
+\usepackage[backend=biber, style=chem-acs]{biblatex}
+\addbibresource{references.bib} % Tells LaTeX where your sources are saved
 
 \title{Globalization and Structural Change in the Phillips Curve}
 \author{Brendan Stimola}
@@ -11,32 +22,41 @@
 
 \begin{document}
 
+\sisetup{
+    input-symbols = {()}, % Tells siunitx to allow literal parentheses
+    table-align-text-post = false,
+    % Pre-allocate space for stars so decimals remain centered
+    table-space-text-post = {***} 
+}
+
 \maketitle
 
 \section{Abstract}
 
-This paper studies whether globalization and China joining the WTO in particular weakens the Phillips Curve relationship in the United States, and how the Phillips Curve evolved over time using different measures for inflation. The first model includes unemployment, trade openness, interaction effects, and lagged inflation. Ordinary Least Squares (OLS) regression is used to estimate the inflation dynamics. The second model uses China's accession into the WTO for a structural break. The model uses 4 variables: unemployment, Post WTO (the immediate drop in inflation following China joining the WTO) and POST UNRATE (The change in slope of the Phillips Curve after China joined the WTO) and lagged inflation. To measure a structural break with the second model there was a Wald test to check for a structural break after 2001.The final model replaces inflation with the inflation gap ($\pi-\overline{\pi}$).The results suggest that inflation is highly persistent and that globalization weakens the relationship between unemployment and inflation. The Phillips Curve remains present in the United States, but globalization weakens the relationship between unemployment and inflation. However, once the inflation gap is accounted for, the globalization effect becomes substantially weaker, suggesting that globalization primarily influences inflation through inflation persistence. Finally in one of the models all of the primary variables of importance, had p-values above 0.5 rendering them useless. These findings are consistent with theories that the Phillips Curve has structurally changed after China joined the WTO due to a more globalized economy. 
+This paper studies whether globalization and China joining the WTO in particular weakens the Phillips Curve relationship globally and in the United States, and how the Phillips Curve evolved over time. This was achieved by using different measures for inflation, different variables and different countries. The first model includes unemployment, trade to GDP, interaction effects, and lagged inflation for the US from 1990 to 2026. Ordinary Least Squares (OLS) regression is used to estimate the inflation dynamics. The second model uses China's accession into the WTO for a structural break and a two stage least squares (2SLS) to fix possible endogeneity in the model. The model uses 2 variables from 14 countries: unemployment and trade to gross domestic product (GDP). To measure a structural break with the second model there was a Wald test to check for a structural break in the variables after 2001. The Instrumental Variables (IV) used were: labor force participation rate (LFPR), lagged unemployment, trade to GDP rate and inflation rate. Finally the tariff rate was used as a variable to paint a picture of how strong global trade was. The final model replaces inflation with the inflation gap ($\pi-\overline{\pi}$) and uses the same 14 countries from model 2, model 2 also uses the same independent variables as model 1. The results suggest that inflation is highly persistent and that globalization weakens the relationship between unemployment and inflation. The Phillips Curve remains present Globally/US, but globalization weakens the relationship between unemployment and inflation. These findings are consistent with theories that the Phillips Curve has structurally changed after China joined the WTO due to a more globalized economy. 
 
 \section{Introduction}
 
-The Phillips Curve is the theory that unemployment and inflation are negatively correlated. Modern-day economists care because this relationship has ripple effects everywhere, from Fed policy to inflation control and employment. The present issue is that the relationship may have weakened due to a variety of reasons. Most of them have to do with how globalization affects prices in an economy. The research question is does increasing trade openness, specifically after China joined the WTO. Change how powerful the Phillips Curve is? The baseline model utilizes an Ordinary Least Squares (OLS) framework to isolate the relationship between trade to GDP and the unemployment rate. The second model uses China joining the WTO, which is a pivotal moment in globalization to see the effect on inflation and unemployment. The third model does the same thing as the first excepts it replaces inflation with the gap between inflation and average inflation.
+The Phillips Curve is the theory that unemployment and inflation are negatively correlated\autocite{investopedia_phillips}. Modern-day economists care because this relationship has ripple effects everywhere, from Federal Reserve (Fed) policy to inflation control and employment. The present issue is that the relationship may have weakened due to a variety of reasons\autocite{BOC}. Most of them have to do with how globalization affects prices in an economy. Across the last years economists have noticed how the curve has gotten flatter\autocite{Cleveland-fed}. Though recently, some have noted that the Phillips Curve got steeper after COVID\autocite{Chicago-fed} The research question is does increasing trade to GDP, specifically after China joined the World Trade Organization (WTO)\autocite{cfr2021} change how powerful the Phillips Curve is? The baseline model utilizes an Ordinary Least Squares (OLS) framework to isolate the relationship between trade to GDP and the unemployment rate. The second model uses China joining the WTO, which is a pivotal moment in globalization to see the effect on inflation and unemployment globally. The third model does the same thing as the second except it replaces inflation with the gap between inflation and average inflation and adds more variables. We hypothesized that the Phillips Curve would have weakened over time due to globalization. Overall, the question we have in our research paper is, does globalization and China's rise into the WTO effect Phillips Curves in just the US and globally? 
 
 \section{Literature Review}
 
-Modern day studies say that globalization is flattening the Phillips Curve (International Journal of Central Banking). The IJCB as its also known attributes this to decoupling demand and supply from domestic markets. Some also state how the output gaps effect on inflation is shrinking because of globalization. Causing pay and unemployment to be based less on the domestic economy (Science Direct). The "Becker Friedman Institute" studies how regional Phillips Curves hold up, and came to the conclusion that 40 percent of the decline in correlation is due to imports (Becker Friedman Institute).
+In the modern day studies about the Phillips Curve and how it has been affected by globalization can be split into two different sides. One side argues that the Phillips Curve has weakened due to globalization and offshoring\autocite{substack_offshoring}. The other side argues that the shift in the Phillips Curve is not due to globalization but shifts in the countries own economy.  Most modern day studies say that globalization is flattening the Phillips Curve\autocite{gaiotti2010}. The IJCB as it is also known attributes this to decoupling demand and supply from domestic markets. Some also state how the output gaps effect on inflation is shrinking because of globalization. Causing pay and unemployment to be based less on the domestic economy\autocite{Kohlscheen2022}. The "Becker Friedman Institute" studies how regional Phillips Curves hold up, and came to the conclusion that 40 percent of the decline in correlation is due to imports\autocite{uchicago_dynamics}. According to science direct, when markets shift production, low-cost manufacturing gets hit the hardest by cost saving actions. According to a paper published by the International Journal of Central Banking\autocite{gaiotti2010}, in Italian manufacturing firms. The increase in globalization did most likely not cause a flattening in the Phillips Curve. On the other hand the Cleveland Fed \autocite{Cleveland-fed} attributes the flattening of the curve to monetary policy and how that affects the household welfare, along with reasons not attributed to monetary policy. Researchers at the Chicago fed\autocite{Chicago-fed} argue that the Phillips Curve has gotten steeper recently, especially after COVID. They attribute this steepening to a rise in the unemployment gap, which is the difference between the country's current unemployment and the long-term trend identified by the OECD November 2019 economic outlook.
 
 \section{Economic Background}
 
-Inflation is the year over year change in the CPI. The CPI uses a basket of goods and services to see the level of the price in an economy. Unemployment is the percent of the labor force that is looking for work but can not find it. Trade openness is measured as:
+Gross domestic product, also known as GDP is the total market value of all final goods and services produced within a country's borders in a specific time period\autocite{FRED_GDP}. Inflation is the year over year change in the consumer price index. The consumer price index (CPI) uses a basket of goods and services to see the level of the price in an economy\autocite{FRED_CPI, bls_cpi}. We measured the year over year change in the CPI then used each countries inflation for checking for the Phillips Curve. Unemployment is the percent of the labor force that is looking for work but can not find it\autocite{FRED_UNRATE, econosphere_lfpr}. This percent was used and compared with inflation to understand the Phillips Curve relationship. Trade to GDP is measured as:
 $$(\frac{Imports+Exports}{GDP})*100$$
-This measures the amount of economic activity that is due to trade. This is used as a proxy for globalization as it measures the percent of the economy that is reliant on trade. Lagged inflation is inflation shifted one period. This is used to see how much of today's inflation is depended on the inflation of the past. This is important because it shows how inflation expectations affect inflation in the long-term. The equation for the Phillips Curve is 
+This measures the amount of economic activity that is due to trade\autocite{FRED_EXPGS, FRED_IMPGS}. This is used as a proxy for globalization as it measures the percent of the economy that is reliant on trade\autocite{gravel_trade}. Lagged inflation is inflation shifted one period. This is used to see how much of today's inflation is depended on the inflation of the past. This is important because it shows how inflation expectations affect inflation in the long-term. The LFPR is measured as:
+$$(\frac{employed+unemployed}{working-age-population})*100$$
+This measures the percent of an economy that tries or does get work. The tariff rate, is the average tariff charged for an item going into a country. The equation of the Phillips Curve uses multiple variables mentioned above (see below). The equation for the Phillips Curve is:
 $$
-\pi_t=\pi^e_t-a(u_t-u_n)+v_t
+\pi_t=\pi^e_t-\alpha(u_t-u_n)+v_t
 $$
 $\pi^e_t$ are the current expectations of inflation. $\alpha$ is the sensitivity of the Phillips Curve, $u_t$ and $u_n$ are the current unemployment and the natural rate of unemployment respectively; And $v_t$ are shocks to the economy (oil shocks etc..). China joining the WTO was a very important moment in history as it marked the beginning of an influx of low-cost imports from China due to increased supply and lower domestic demand to the USA.
 \section{Data}
 
-For inflation in model 1 the year over year change in the CPI was used. For inflation in model 3 the inflation (from model 1) - average inflation was calculated to get the inflation gap. For the unemployment source the domestic unemployment rate is measured to get a picture of the labor market. For the trade term trade to GDP was picked to capture the openness of the US economy. Lagged Inflation was introduced to capture the momentum and persistence of inflation. In the model there is a "dummy variable" to split the regression into pre- and post-2001. All of these economic terms are known as CPIAUCSL(inflation), UNRATE(unemployment rate), EXPGS and IMPGS (added together are trade), GDP(size of the economy). This was chosen as they are standard macro variables used in assessing the Phillips Curve. Below is a figure of trade to GDP which is imports plus exports over GDP.
+For inflation in model 1 the year over year change in the CPI was used. For inflation in model 3 the inflation gap was calculated by substracting the average inflation from each of the countries. For the unemployment source the unemployment rate is measured to get a picture of the labor market. For the trade term trade to GDP was picked to capture the openness of the global economy. Lagged inflation was introduced to capture the momentum and persistence of inflation. In the model there is a "dummy variable" to split the regression into before and after 2001. These were chosen as they are standard macro variables used in assessing the Phillips Curve. Below is a figure of trade to GDP which is imports plus exports over GDP.
 
 \begin{figure}[H] 
 \centering 
@@ -47,40 +67,55 @@ For inflation in model 1 the year over year change in the CPI was used. For infl
 
 \section{Methodology}
 
-For the regression method OLS was chosen. The purpose was the analyze the relationship between inflation, the unemployment rate and how globalized an economy is. The interaction term tests to what degree globalization effects the Phillips Curve. The equation for the first model is:
+For the regression method OLS was chosen because after using HAC standard errors, OLS is the best linear unbiased estimator (BLUE)\autocite{builtin_ols}. The purpose was to analyze the relationship between inflation, the unemployment rate and how globalized an economy is compared to the size of its economy. The interaction term tests to what degree globalization affects the Phillips Curve relationship. Two-way fixed effects (2WFE) was also used to account for different conditions over time and different places. The equation for the first model is:
 \begin{align*}
-\text{Inflation}_t =
+\Delta\pi_t =
 & \ \beta_0 + \beta_1 \text{Unemployment}_t + \beta_2 \text{Trade}_t \\
-& + \beta_3 \text{Interaction}_t + \beta_4 \text{Inflation}_{t-1} + \varepsilon_t
+& + \beta_3 \text{Interaction}_t + \beta_4 \Delta\text{Inflation}_{t-1} + \varepsilon_t
 \end{align*}
 The equation for the second model is:
 \begin{align*}
-\text{Inflation}_t =
-& \ \beta_0 + \beta_1 \text{Unemployment}_t + \beta_2 \text{Post UNRATE}_t \\
-& + \beta_3 \text{Post WTO}_t + \text{Inflation}_{t-1} + \varepsilon_t
+\pi_t =
+& \ \beta_0 + \beta_1 \text{Unemployment}_t + \beta_2 \text{Trade} + \varepsilon_t
 \end{align*}
 The equation for the third model is:
 \begin{align*}
-\text{Inflation Gap}_t =
+\pi_t-\overline{\pi}=
 & \ \beta_0 + \beta_1 \text{Unemployment}_t + \beta_2 \text{Trade}_t \\
-& + \beta_3 \text{Interaction}_t + \text{Inflation}_{t-1} + \varepsilon_t
+& + \beta_3 \text{Interaction}_t + \beta_4 \text{Inflation}_{t-1} + \varepsilon_t
 \end{align*}
-Where $\pi_t$ is the current inflation. This equation uses the betas as coefficients to measure the line of best fit. Each variable is multiplied by its beta and then the error is added to try to estimate the inflation or inflation gap ($\pi_t-\overline{\pi}$). The average inflation in the inflation gap, is the average of inflation in the US from 1954-2026.
+Where $\pi_t$ is the current inflation. This equation uses the betas as coefficients to measure the line of best fit. Each variable is multiplied by its beta and then the error is added to try to estimate the inflation or inflation gap ($\pi_t-\overline{\pi}$). The average inflation in the inflation gap is the average of inflation in the countries from 1954-2026.  The average inflation is calculated by taking the average inflation from each country
+\newline
+\\
+The data used was collected from the World Bank database for most of the data, and for the first model federal reserve economic data (FRED) was used to look at the US data points. 
+\newline
+\\\
+The local US-only panel used quarterly data from 1990 to 2026. There were a total of 144 observations in this model. This model used a base OLS to look at how the Phillips curve behaved between 1990 and 2026.  Along with the base OLS, a Wald test was used on the local model to check for a structural break after 2001\autocite{statshowto_wald}.
+\newline
+\\
+The global panel used 14 countries for models 2 and 3: U.S., Canada, UK, Germany, France, Spain, Italy, the Netherlands, Japan, South Korea, Australia, Mexico, Vietnam and Singapore. The countries were observed from 1990-2026 annually. Some data had to be dropped due to the lack of economic data in some countries. In total there were 345 observations in models 2 and 3.
+\newline
+\\
+The global panel used 2SLS and HAC standard errors to account for endogeneity, autocorrelation and heteroskedasticity in the model. HAC standard errors stand for Heteroskedasticity- and autocorrelation-consistent. The standard errors try to account for autocorrelation and heteroskedasticity in the model. 2SLS works by recalculating the variables from other variables to get rid of endogeneity\autocite{timeseries_2sls}. 
+\newline
+\\
+2WFE were used in models 2 and 3 to get rid of the differences due to time and places in the data\autocite{metricgate_2wfe}. For example 2WFE would compare data in the same time period or country to account for the difference in data. Recessions happen which could affect the data over time, and in different countries the economy is run differently so that has adjusted for.
 \section{Results}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
-Variable & Coefficient & P-value & Std Err \\
+Variable & Coefficient & P-value & Std. Err. \\
 \hline
-UNRATE & -0.267 & $<0.01$ & 0.067 \\
-TRADE & 0.012 & 0.296 & 0.011\\
-Interaction & 0.023 & $<0.01$ & 0.008 \\
-Lagged Inflation & 1.017 & $<0.01$ & 0.016 \\
+Unemployment Rate & -0.1607 & 0.002 & 0.052 \\
+Trade / GDP & -0.0006 & 0.923 & 0.006 \\
+Interaction (Unemployment $\times$ Trade) & 0.0087 & 0.039 & 0.004 \\
+Lagged Inflation & 0.4102 & $<0.001$ & 0.089 \\
 \hline
 \end{tabular}
 \caption{Regression Results for Model 1}
+\label{tab:model1}
 \end{table}
 
 \begin{table}[H]
@@ -89,13 +124,11 @@ Lagged Inflation & 1.017 & $<0.01$ & 0.016 \\
 \hline
 Variable & Coefficient & P-value & Std Err \\
 \hline
-UNRATE & -0.059 & 0.558 & 0.100\\
-Post WTO & 0.065 & 0.730 & 0.188\\
-Post UNRATE & -0.060 & 0.599 & 0.115\\
-Lagged Inflation & 0.946 & $<0.01$ & 0.035\\
+UNRATE & 0.621 & 0.082 & 0.357\\
+Trade & -0.0003 & 0.941 & 0.006\\
 \hline
 \end{tabular}
-\caption{Regression Results for Model 2 (lagged inflation)}
+\caption{Regression Results for Model 2 (Before-2001)}
 \end{table}
 
 \begin{table}[H]
@@ -104,12 +137,11 @@ Lagged Inflation & 0.946 & $<0.01$ & 0.035\\
 \hline
 Variable & Coefficient & P-value & Std Err \\
 \hline
-UNRATE & -0.267 &    $<0.01$ & 0.330\\
-Post WTO &  -2.191  &  0.096  &  1.315\\
-Post UNRATE &  -2.731  &   $<0.01$  & 0.534\\
+UNRATE & 0.164 & $<0.01$ & 0.061\\
+Trade & 0.009 & 0.096 & 0.00\\
 \hline
 \end{tabular}
-\caption{Regression Results for Model 2 (without lagged inflation)}
+\caption{Regression Results for Model 2 (After-2001)}
 \end{table}
 
 \begin{table}[H]
@@ -118,10 +150,10 @@ Post UNRATE &  -2.731  &   $<0.01$  & 0.534\\
 \hline
 Variable & Coefficient & P-value & Std Err \\
 \hline
-UNRATE & -0.107 & 0.01 & 0.041\\
-TRADE & 0.037 & 0.239 & 0.031\\
-Interaction & -0.002 & 0.848 & 0.013\\
-Lagged Inflation & 0.961 & $<0.01$ & 0.030\\
+UNRATE & -0.008 & 0.882 & 0.053\\
+TRADE & 0.002 & 0.512 & 0.003\\
+Interaction (Unemployment $\times$ Trade) & -0.001 & 0.436 & 0.001\\
+Lagged Inflation & 0.712 & $<0.01$ & 0.082\\
 \hline
 \end{tabular}
 \caption{Regression Results for Model 3}
@@ -133,22 +165,22 @@ Lagged Inflation & 0.961 & $<0.01$ & 0.030\\
 \hline
 Model & $R^2$ & Durbin-Watson & Cond. No. \\
 \hline
-Model 1 & 0.983 & 1.187 & 28.2\\
+Model 1 & 0.286 & 2.176 & 19.0\\
 Model 2 & 0.940 & 1.478 & 40.5\\
-Model 3 & 0.940 & 1.503 & 6.74\\
+Model 3 & 0.532 & 1.924 & 1740\\
 \hline
 \end{tabular}
 \caption{Results for the models}
 \end{table}
 
-The results for the final table suggest that most of the data is overall correct but some p-values are too high to be used. Adding lagged inflation increases the r squared and the Durbin-Watson, but also removes the noise that the variables used to absorb leaving a more cyclical pattern that raises p-values. Overall though besides the second model which used a different model and caused higher unusable p-values. The models overall have pretty good results and can be trusted.
+The results for the final table suggest that most of the data is overall correct but some p-values are too high to be used. Adding lagged inflation increases the r squared and the Durbin-Watson, but also removes the noise that the variables used to absorb leaving a more cyclical pattern that raises p-values. This can be seen in model 3 where the Durbin-Watson is better, but the R squared and conditional numbers are worse compared to model 2. Overall though besides the second model which used a different model and suggests higher p-values that fail to reject the null hypothesis. The models overall have significant results and can be used in answering the research question.
 
 \subsection{The normal Phillips Curve (with trade to GDP and interaction term) from 1954 to 2026}
-The unemployment is negative and statistically significant, meaningly that the Phillips Curve does still exist but maybe just weaker. The lagged inflation is very close to 1 and has a p-value less than 0.05 meaning inflation is very dependent on inflation from the past. The trade term is positive but not statistically significant (P = 0.296), so we fail to reject the null hypothesis that trade openness has an effect on inflation. The trade times unemployment rate though yielded economically meaningful results. The interaction term is positive meaning globalization does flatten the Phillips Curve, and the p-value is less than 0.01 meaning it is statistically significant. 
-\subsection{The before and after China joined WTO}
-In model 2 there are some interesting results, even though they may be hard to see. In model 2 with lagged inflation only Lagged Inflation is significant. It has a p value of less than 0.01 and a coefficient of 0.961. While not visible in just the table, this is important data to see. When there is no lagged inflation the variables absorb the error terms. Causing their p-values to inflate and make the model look significant. When adding the lagged inflation, all that remains is the cyclical cycle underneath. These variables not being significant proves that China joining the WTO may have caused a structural break, but the cyclical variables never changed. This pattern is consistent with what can be observed when the lagged inflation is removed. Looking at the full picture not just cyclical, it is clear that there may have been a structural break. The Wald test came back positive signifying that China joining the WTO structurally changed the US economy.
-\subsection{Inflation gap model}
-However, In model 3 some of the variables are statistically insignificant. The reason for this is once the inflation gap is accounted for all that is left is the short-term trends that makes unemployment harder to track. Once the long-term movement is removed the pattern is very cyclical and could cause the model to not function and give results with weaker explanatory power. The unemployment rate is still significant with a negative coefficient and significant p-value. Just like the lagged inflation which also acted just like it did in the other model.
+In model 1, we are just observing the base results from the US, though it is important to note that HAC standard errors were used to correct for the high Durbin-Watson. In this model the unemployment is negative and statistically significant, meaning that the Phillips Curve does still exist but maybe just weaker. The lagged inflation is very close to 0.5 and has a p-value less than 0.05 meaning inflation is very dependent on inflation from the past. The trade term is barely negative but not statistically significant, the p-value was 0.923, so we fail to reject the null hypothesis that trade to GDP has an effect on inflation. The trade times unemployment rate though yielded economically meaningful results. The interaction term is positive meaning globalization does flatten the Phillips Curve, and the p-value is less than 0.01 meaning it is statistically significant. While it is important to note that the US only Wald Test came back negative meaning that in the US there was possible no structural break. This could be due to the fact that the Wald test was only run from 1990-2026. It also should be noted that before first differencing to fix the lagged inflation, the variable was above 1 meaning it was a non-stationary variable.
+\subsection{The before and after China joined WTO in 14 countries 2SLS Model}
+In model 2 there were economicly viable results. The global Wald test came back positive. Along with results from the 2WFE and 2SLS. The 2SLS model suggests that especially in post-2001 there were significant and important findings, while some of the variables were not significant. The F-statistic and more data suggests that there was a structural break after 2001, along with this not being based on endogeneity. To be specific the instrumental variables were significant (meaning they could predict unemployment and trade to GDP), yet they could not use that data to predict inflation. Suggesting a more complex and nuanced interpretation. This means that globally unemployment and trade to GDP were not as good predictors of inflation compared to what was previously thought.
+\subsection{Inflation gap model in 14 countries}
+However, In model 3 some of the variables are statistically insignificant. The reason for this is once the inflation gap is accounted for all that is left is the short-term trends that makes unemployment harder to track. Once the long-term movement is removed the pattern is very cyclical and could cause the model to not function and give results with weaker explanatory power. the only significant variable is lagged inflation, proving that lagged inflation affects current inflation through cyclical patterns.
 
 \subsection{Structural Change in the Phillips Curve}
 
@@ -178,9 +210,132 @@ However, In model 3 some of the variables are statistically insignificant. The r
 
 Above are 2 figures are showing the Phillips Curve relationship in two periods. 1954-2001 (before China joined the WTO) and 2001-2026 (after China joined the WTO). A crucial nuance is observable in figure two,  it may seem that high globalization is just like low globalization and globalization has opposite effect on Phillips Curve. Because globalization is high after 2001 low globalization is still high by historical standards. Also because of the recessions where inflation drops and unemployment rises the data could be slightly unreliable.
 
-\section{Diagnostics and Limitations}
-\subsection{Diagnostics} 
-To verify the core OLS assumptions of normality and linearity, I evaluated three diagnostic plots: a Quantile-Quantile (Q-Q) plot, a residuals histogram, and a residuals vs. fitted values plot (Figure \ref{fig:diagnostics}). 
+\section{Limitations}
+Unfortunately there are also limitations. There are missing variables such as expectations for unemployment and inflation. Monetary and fiscal policy could also alter the Phillips Curve. There could be omitted variable bias (OVB), OVB is when there are variables that are not in a model but affect the models. Endogeneity is when two variables effect each other and it is impossible to tell what variable affects the other. Endogeneity is present in this paper because of the core relationship between inflation and unemployment that is getting studied. The economy also structurally changes over time which could affect the Phillips Curve. This is also only a simplified model of the economy, this model doesn't take in enough factors to better represent the economy. The trade to GDP doesn't take into account re-exports, re-exports could artificially boosting the trade to GDP number. Using a dummy variable could also hide certain long-term trend affecting the data. Using the dates from 2001-2026 could be skewed due to the 3 recessions and the inflation spike in the aftermath of COVID-19. Also in the third model, the addition of lagged inflation proved that the break was not on the cyclical level, meaning that is it possible that no break occurred.
+
+\section{Discussion}
+
+Looking at the data it is a possible to see a Phillips Curve that has revived in certain periods, but is still active despite the theories about globalization. The models also reveals how China joining the WTO and possibly the dot-com crash, lowered baseline inflation over the next 20 years, but didn't affect the Phillips Curve. Though, by adding lagged inflation is can be observed that the important variables become insignificant. Likely meaning that there was a break just not at the cyclical level. Lagged inflation is also very persistent and means that expectations and consumer decisions are very important for central bank policy and inflation control. When putting the inflation gap in the equation the p-values become weaker, and the coefficients become flatter. This is backed up by the Wald test, showing that after 2001 the relationships in the global economy fundamentally shifted.
+
+\section{Conclusion}
+
+In the global economy, The accession of China into the WTO, suggests a structural break in the Phillips Curve relationship. The Phillips Curve changes throughout different time "regimes" using different ways to measure inflation. The findings were, China joining the WTO, caused a global decouple in the Phillips curve. The Phillips Curve is still around but has been flattened and strengthened throughout different time periods and different places, likely due to the fact that the Phillips Curve was not cyclical. This could be interpreted as firms offshoring employment to low-cost areas raising unemployment\autocite{sciencedirect_hetero}. Firms would also be using cheaper goods lowering inflation. In the two models not using China's rise, inflation was heavily dependent on lagged inflation. The broader macro meaning is when firms can offshore hiring for cheaper costs, inflation declines as international supply rises and domestic stayed steady, because the glut of goods was so great domestic prices were lowered and domestic unemployment in the non-cyclical sector was raised due to off-shored supply. This research could be continued by looking at the Phillips Curve in different time periods and different countries.
+
+\printbibliography[title={References}]
+
+\appendix
+
+\section{Variable definitions/Data Sources}
+
+There were a variety of variables used in the different models. One of the most common was inflation. Inflation is CPIAUSCL on FRED, FRED stands for federal reserve economic data, FRED was the website used for the only-US model. Another variable is unemployment, which is measured as the UNRATE on FRED. Trade GDP is more complicated and uses, GDP, Imports (IMPTS) and Exports (EXPTS). All of these variables are then put in one formula (see Economic Background) to determine the Trade to GDP. The interaction term and lagged inflation both used pre-existing variables. Lagged inflation is inflation shifted one month, while interaction is trade to GDP times the unemployment rate. The LFPR and Tariff rate use world bank data (along with other countries for their variables). The codes for those variables are SL.TLF.ACTI.ZS and TM.TAX.MRCH.WM.AR.ZS respectively.  The 14 countries used were: U.S., Canada, UK, Germany, France, Spain, Italy, the Netherlands, Japan, South Korea, Australia, Mexico, Vietnam and Singapore.
+
+\section{Full regression results}
+
+\begin{table}[H]
+    \centering
+    \caption{Regression Models of Inflation Rates}
+    \label{tab:regression_results}
+    \small
+    \begin{tabular}{l *{4}{S[table-format=-1.4, table-space-text-post={***}]}}
+        \toprule
+        & {Model 1} & \multicolumn{2}{c}{Model 2 (Global 2SLS)} & {Model 3} \\
+        \cmidrule(lr){3-4}
+        Variable & {Base US (OLS)} & {Pre-2001} & {Post-2001} & {Inflation Gap (OLS)} \\
+        \midrule
+        Constant & 0.0302 & & & 0.9579** \\
+         & (0.058) & & & (0.375) \\
+        \addlinespace
+        Unemployment Rate & -0.1607*** & 0.6206* & 0.1642*** & -0.0079 \\
+         & (0.052) & (0.3572) & (0.0614) & (0.053) \\
+        \addlinespace
+        Trade / GDP & -0.0006 & -0.0003 & 0.0094 & 0.0017 \\
+         & (0.006) & (0.0045) & (0.0062) & (0.003) \\
+        \addlinespace
+        Interaction & 0.0087** & & & -0.0005 \\
+         & (0.004) & & & (0.001) \\
+        \addlinespace
+        Lagged Inflation & 0.4102*** & & & 0.7118*** \\
+         & (0.089) & & & (0.082) \\
+        \midrule
+        Observations & {274} & {42} & {303} & {359} \\
+        R-squared & {0.286} & {0.1897} & {0.3780} & {0.532} \\
+        Adjusted R-squared & {0.275} & {0.1492} & {0.3739} & {0.526} \\
+        F-statistic & {14.67} & {3.706} & {32.929} & {32.60} \\
+        Estimation Method & {OLS (HAC)} & {IV-2SLS} & {IV-2SLS} & {OLS (HAC)} \\
+        \bottomrule
+        \multicolumn{5}{l}{\footnotesize Standard errors are reported in parentheses under coefficients.} \\
+        \multicolumn{5}{l}{\footnotesize Significance levels: * $p < 0.10$, ** $p < 0.05$, *** $p < 0.01$.}
+    \end{tabular}
+\end{table}
+
+\section{Wald Test}
+
+\begin{table}[H]
+    \centering
+    \caption{OLS Structural Break Models and Wald Test Diagnostics}
+    \label{tab:wald_structural_break}
+    \small
+    \begin{tabular}{l *{2}{S[table-format=-1.4]}}
+        \toprule
+        & {Model 4} & {Model 5} \\
+        Variable & {Wald Global (OLS)} & {Wald US (OLS)} \\
+        \midrule
+        Constant & 3.8245*** & 0.0110 \\
+         & (0.5166) & (0.086) \\
+        \addlinespace
+
+        Unemployment Rate & 0.0440 & -0.2150** \\
+         & (0.0919) & (0.088) \\
+        \addlinespace
+
+        Trade / GDP & -0.0024 & -0.0046 \\
+         & (0.0044) & (0.010) \\
+        \addlinespace
+
+        Interaction (Unemp. $\times$ Trade) & 0.0001 & 0.0017 \\
+         & (0.0011) & (0.008) \\
+        \addlinespace
+
+        Lagged Inflation & & 0.4073*** \\
+         & & (0.088) \\
+        \midrule
+
+        \multicolumn{3}{l}{\textbf{Structural Break Term (Post-2001)}} \\
+        \midrule
+
+        Post-2001 Indicator & & 0.0575 \\
+         & & (0.169) \\
+        \addlinespace
+
+        Unemployment $\times$ Post-2001 ($u\_post$) & -0.2375** & 0.1479 \\
+         & (0.1058) & (0.157) \\
+        \midrule
+
+        Observations & {359} & {274} \\
+        R-squared & {0.055} & {0.287} \\
+        Adjusted R-squared & {0.044} & {0.271} \\
+        Covariance Type & {Standard} & {HAC} \\
+        \midrule
+
+        \multicolumn{3}{l}{\textbf{Wald Test Diagnostics ($F$-statistics)}} \\
+        \midrule
+
+        Slope Change ($u\_post = 0$) & 5.041** & 0.890 \\
+        \quad [$p$-value] & {[0.025]} & {[0.346]} \\
+        \addlinespace
+
+        Full Structural Break & 5.041** & 0.446 \\
+        \quad [$p$-value] & {[0.025]} & {[0.640]} \\
+        \bottomrule
+
+        \multicolumn{3}{l}{\footnotesize Standard errors are reported in parentheses.} \\
+        \multicolumn{3}{l}{\footnotesize HAC standard errors use 4 lags.} \\
+        \multicolumn{3}{l}{\footnotesize Significance levels: * $p<0.10$, ** $p<0.05$, *** $p<0.01$.}
+    \end{tabular}
+\end{table}
+
+\section{Diagnostics} 
+To verify the core OLS assumptions of normality and linearity, I evaluated three diagnostic plots: a Quartile-Quartile (Q-Q) plot, a residuals histogram, and a residuals vs. fitted values plot. (Figure \ref{fig:diagnostics}). 
 
 \begin{figure}[H]
      \centering
@@ -188,55 +343,27 @@ To verify the core OLS assumptions of normality and linearity, I evaluated three
          \centering
          \includegraphics[width=\textwidth]{QQ_PLOT.png}
          \caption{Q-Q Plot}
-         \label{fig:qq_plot}
+         \label{fig:qq$_$plot}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.32\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Residuals_histogram.png}
          \caption{Residuals Histogram}
-         \label{fig:residuals_histogram}
+         \label{fig:residuals$_$histogram}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.32\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Residuals_vs_Fitted.png}
          \caption{Residuals vs. Fitted}
-         \label{fig:residuals_vs_fitted}
+         \label{fig:residuals$_$vs$_$fitted}
      \end{subfigure}
         \caption{Model diagnostic plots. The Q-Q plot (a) shows residuals aligning with the 45-degree normal reference line. The histogram (b) confirms a symmetric, bell-shaped error distribution. The residuals vs. fitted plot (c) displays a random scatter around the zero line, confirming linearity and homoscedasticity.}
         \label{fig:diagnostics}
 \end{figure}
 
-All three diagnostics satisfy the necessary assumptions. The residuals closely align with the reference line in Figure \ref{fig:qq_plot}, confirming normally distributed error terms. This is further substantiated by the symmetric bell-curve in Figure \ref{fig:residuals_histogram}. Finally, the random dispersion around the zero line in Figure \ref{fig:residuals_vs_fitted} confirms the linearity of the relationship, indicating a robust baseline regression model.
+All three diagnostics satisfy the necessary assumptions. The residuals closely align with the reference line in Figure \ref{fig:qq$_$plot}, confirming normally distributed error terms. This is further substantiated by the symmetric bell-curve in Figure \ref{fig:residuals$_$histogram}. Finally, the random dispersion around the zero line in Figure \ref{fig:residuals$_$vs$_$fitted} confirms the linearity of the relationship, indicating a robust baseline regression model.
 \\
 \\
-\subsection{Limitations}
-Unfortunately there are also limitations. There are missing variables such as expectations for unemployment and inflation. Monetary and fiscal policy could also alter the Phillips Curve. There could be omitted variable bias(OVB), OVB is when there are variables that are not in a model but affect the models. Endogeneity is when two variables effect each other and it is impossible to tell what variable affects the other. Endogeneity is present in this paper because of the core relationship between inflation and unemployment that is getting studied..The economy also structurally changes over time which could affect the Phillips Curve. This is also only a simplified model of the economy, this model doesn't take in enough factors to better represent the economy. The trade to GDP doesn't take into account re-exports, re-exports could artificially boosting the trade to GDP number. Using a dummy variable could also hide certain long-term trend affecting the data. Using the dates from 2001-2026 could be skewed due to the 3 recessions and the inflation spike in the aftermath of COVID-19. Also in the second model, the addition of lagged inflation proved that the break was not on the cyclical level, meaning that is it possible that no break occurred.
-
-\section{Discussion}
-
-Looking at the data paints a picture of a Phillips Curve that has revived in certain periods, but is still active despite the theories about globalization. The model also reveals how China joining the WTO and possibly the dot-com crash, lowered baseline inflation over the next 20 years, but didn't affect the Phillips Curve. Though, by adding lagged inflation is can be observed that the important variables become insignificant. Likely meaning that there was a break just not at the cyclical level. Lagged inflation is also very persistent and means that expectations and consumer decisions are very important for fed policy and inflation control. When putting the inflation gap in the equation the p-values become weaker, and the coefficients become flatter. This is backed up by the Wald test, showing that after 2001 the relationships in the US economy fundamentally shifted.
-
-\section{Conclusion}
-
-In the United States, The accession of China into the WTO, Causes a structural break in the Phillips Curve relationship. The Phillips Curve changes throughout different time "regimes" using different ways to measure inflation. The findings were, China possibly caused a drop in inflation and a strengthening in the Phillips Curve after they joined the WTO. The Phillips Curve is still around but has been flattened and strengthened throughout different time periods likely due to the fact that the Phillips Curve was not cyclical. This could be interpreted as firms offshoring employment to low-cost areas raising unemployment. Firms would also be using cheaper goods lowering inflation. In the two models not using China's rise, inflation was heavily dependent on lagged inflation. The broader macro meaning is when firms can offshore hiring for cheaper costs, inflation declines as international supply rises and domestic stayed steady, because the glut of goods was so great  domestic prices were lowered and domestic unemployment in the non-cyclical sector was raised due to off-shored supply. This research could be continued by looking at the Phillips Curve in different time periods and different countries.
-
-\begin{thebibliography}{9}
-
-\bibitem{fed}
-Federal Reserve Economic Data.
-"CPIAUCSL, UNRATE, MICH, GDP, IMPGS, EXPGS"
-\bibitem{IJCB}
-International Journal of Central Banking
-"Has Globalization Changed the Phillips Curve? Firm-Level Evidence on the Effect of Activity on Prices"
-\bibitem{Science}
-Science Direct
-"Globalization and the slope of the Phillips curve"
-\bibitem{Institute}
-Becker Friedman Institute
-"Globalization, Inflation Dynamics, and
-the Slope of the Phillips Curve"
-\end{thebibliography}
-
 \end{document}

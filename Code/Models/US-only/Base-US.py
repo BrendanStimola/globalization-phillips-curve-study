@@ -59,7 +59,7 @@ y = df["INFLATION"]
 
 model = sm.OLS(y, X).fit(
     cov_type="HAC",
-    cov_kwds={"maxlags": 2}
+    cov_kwds={"maxlags": 4}
 )
 
 print(model.summary())
@@ -78,6 +78,7 @@ fitted = model.fittedvalues
 sm.qqplot(residuals, line="45")
 plt.title("QQ Plot of Residuals")
 plt.show()
+plt.savefig("qq_plot_residuals.png", dpi=300, bbox_inches="tight")
 
 plt.figure()
 plt.hist(residuals, bins=30, edgecolor="black")
@@ -85,6 +86,7 @@ plt.title("Histogram of Residuals")
 plt.xlabel("Residual")
 plt.ylabel("Frequency")
 plt.show()
+plt.savefig("histogram_residuals.png", dpi=300, bbox_inches="tight")
 
 plt.figure()
 plt.scatter(fitted, residuals, alpha=0.6)
@@ -93,6 +95,7 @@ plt.title("Residuals vs Fitted Values")
 plt.xlabel("Fitted Values")
 plt.ylabel("Residuals")
 plt.show()
+plt.savefig("residuals_vs_fitted.png", dpi=300, bbox_inches="tight")
 
 # -----------------------------
 # GRAPH FUNCTION

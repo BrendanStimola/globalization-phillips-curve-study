@@ -39,7 +39,7 @@ y = df["INFLATION"]
 
 model = sm.OLS(y, X).fit(
     cov_type="HAC",
-    cov_kwds={"maxlags": 1}
+    cov_kwds={"maxlags": 4}
 )
 
 print(model.summary())
