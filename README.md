@@ -15,20 +15,28 @@ Has globalization weakened the traditional relationship between unemployment and
 │   ├── Raw/
 │   └── Processed/
 │
-├── Models/
-│   ├── Base-US.py
-│   ├── Inflation-Lagged-Global.py
-│   ├── Wald.py
-│   └── 2SLS.py
+|
 │
 ├── Code/
-│   ├── Clean.py
-│   └── Engineering.py
+│   ├──clean/
+|   |    └─── Clean.py
+|   ├── Models/
+│   |    ├── US-only/
+|   |    |  ├─── Wald.py
+|   |    |  └─── Base-US.py
+│   |    ├── inflation-lagged-global/
+|   |    |  └── Inflation-Lagged-Global.py
+|   |    ├── Phillips-Curve-WTO-Global
+|   |    |  ├── Wald_Global.py
+|   |    |  └── 2SLS.py
+│   |    └── Engineering.py
+|   └── plots/
+│   
 │
-├── Plots/
 │
 └── Paper/
     ├── Main.tex
+    ├── References.bib
     └── Figures/
 ```
 
@@ -49,6 +57,7 @@ The analysis uses:
 - HAC (Newey-West) standard errors
 - Interaction models
 - Structural break tests using Wald statistics
+- Two-Way Fixed Effects (2WFE)
 - Two-Stage Least Squares (2SLS)
 - Augmented Dickey-Fuller stationarity tests
 
@@ -60,7 +69,7 @@ The analysis finds:
 - Strong inflation persistence through lagged inflation.
 - Limited evidence that trade openness alone affects inflation.
 - Evidence that globalization may influence the unemployment-inflation relationship through interaction effects.
-- No statistically significant structural break after 2001 in the final specification.
+- No statistically significant structural break after 2001 in the US, but a break globally.
 
 ## Running the Analysis
 
@@ -70,18 +79,20 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Run the scripts inside the `Models/` and `Code/` directories.
+Run the scripts inside the `Code/` directory.
 
 ## Requirements
 
 Main Python packages:
 
+- wbgapi
 - pandas
 - numpy
 - statsmodels
-- scipy
 - matplotlib
+- scipy
 - linearmodels
+- pyfixest
 
 ## Paper
 
